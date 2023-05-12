@@ -61,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textView);
         textView.setText(calc_bar_str);
         if(calc_bar_str.contains("X")){
-            calc_bar_str.replace("X" , "*");
+            calc_bar_str = calc_bar_str.replace("X" , "*");
+        }if(calc_bar_str.contains("÷")){
+            calc_bar_str = calc_bar_str.replace("÷", "/");
         }
         Expression expression = new ExpressionBuilder(calc_bar_str).build();
 
@@ -114,24 +116,33 @@ public class MainActivity extends AppCompatActivity {
         EditText calc_bar = findViewById(R.id.editTextText);
         String calc_bar_str = String.valueOf(calc_bar.getText());
         calc_bar.setSelection(calc_bar_str.length());
-        ArrayList<String> str = new ArrayList<>();
+        button_clear(view);
+        buttonTap(calc_bar_str.substring(0,calc_bar_str.length()-1));
 
 
 
     }
 
     public void button_left_brack(View view) {
+        buttonTap(")");
     }
 
     public void button_right_brack(View view) {
+        buttonTap("(");
     }
 
     public void button_clear(View view) {
+        EditText calc_bar = findViewById(R.id.editTextText);
+        TextView textView = findViewById(R.id.textView);
+        calc_bar.setText("0");
+        textView.setText("0");
     }
 
     public void button_0(View view) {
+        buttonTap("0");
     }
 
     public void button_dot(View view) {
+        buttonTap(".");
     }
 }
